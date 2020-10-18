@@ -1,5 +1,3 @@
-const express = require('express');
+const app = require('./config/custom-express');
 
-const app = express();
-
-app.listen(3000, () => console.log('Server is running! PORT: 3000'));
+app.listen(3000, () => console.log("Server is running! PORT: 3000"));
