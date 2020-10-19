@@ -92,6 +92,24 @@ class AtendimentoModel {
       }
     });
   }
+
+  modify(id, values, res) {
+    if (values.dataAgendado) {
+      values.dataAgendado = moment(values.dataAgendado, "DD/MM/YYYY").format(
+        "YYYY-MM-DD"
+      );
+    }
+
+    const sql = "UPDATE atendimentos SET ? WHERE ID = ?";
+
+    db.query(sql, [values, id], (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.json(result);
+      }
+    });
+  }
 }
 
 module.exports = new AtendimentoModel();

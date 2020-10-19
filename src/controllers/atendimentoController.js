@@ -19,4 +19,11 @@ module.exports = (app) => {
 
     AtendimentoModel.store(atendimento, res);
   });
+
+  app.patch('/atendimentos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const values = req.body;
+
+    AtendimentoModel.modify(id, values, res);
+  });
 };
