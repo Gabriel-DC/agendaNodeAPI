@@ -64,7 +64,7 @@ class AtendimentoModel {
       if (err) {
         res.status(400).json(err);
       } else {
-        res.json(result);
+        res.status(201).json(result);
       }
     });
   }
@@ -74,7 +74,7 @@ class AtendimentoModel {
 
     db.query(sql, (err, result) => {
       if (err) {
-        res.json(err);
+        res.status(400).json(err);
       } else {
         res.json(result);
       }
