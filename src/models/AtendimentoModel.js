@@ -68,6 +68,18 @@ class AtendimentoModel {
       }
     });
   }
+
+  lista(res) {
+    const sql = "SELECT * FROM atendimentos";
+
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(result);
+      }
+    });
+  }
 }
 
 module.exports = new AtendimentoModel();
