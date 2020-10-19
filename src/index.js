@@ -1,6 +1,6 @@
 const app = require("./config/custom-express");
 const db = require("./infra/database");
-const Tabelas = require('./infra/migrations/tabelas');
+const Tabelas = require("./infra/migrations/tabelas");
 
 db.connect((err) => {
   if (err) {
