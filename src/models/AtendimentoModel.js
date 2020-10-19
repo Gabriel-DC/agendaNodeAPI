@@ -3,7 +3,31 @@ const db = require("../infra/database");
 const Util = require("../Util/functions");
 
 class AtendimentoModel {
-  adiciona(atendimento, res) {
+  show(id, res) {
+    const sql = "SELECT * FROM atendimentos WHERE id = ?";
+    db.query(sql, [id], (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        const [atendimento] = result;
+        res.json(atendimento);
+      }
+    });
+  }
+
+  index(res) {
+    const sql = "SELECT * FROM atendimentos";
+
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.json(result);
+      }
+    });
+  }
+
+  store(atendimento, res) {
     const dataCriacao = moment().format("YYYY-MM-DD HH:mm:ss");
     const dataAgendado = moment(atendimento.dataAgendado, "DD/MM/YYYY").format(
       "YYYY-MM-DD"
@@ -65,18 +89,6 @@ class AtendimentoModel {
         res.status(400).json(err);
       } else {
         res.status(201).json(result);
-      }
-    });
-  }
-
-  lista(res) {
-    const sql = "SELECT * FROM atendimentos";
-
-    db.query(sql, (err, result) => {
-      if (err) {
-        res.status(400).json(err);
-      } else {
-        res.json(result);
       }
     });
   }
