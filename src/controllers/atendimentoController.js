@@ -1,14 +1,13 @@
-const AtendimentoModel = require('../models/AtendimentoModel');
+const AtendimentoModel = require("../models/AtendimentoModel");
 
 module.exports = (app) => {
-  app.get('/atendimentos/:id', (req, res) => {
+  app.get("/atendimentos/:id", (req, res) => {
     const id = parseInt(req.params.id);
 
     AtendimentoModel.show(id, res);
-  })
+  });
 
   app.get("/atendimentos", (req, res) => {
-
     AtendimentoModel.index(res);
 
     //res.send("Rota de atendimentos");
@@ -20,10 +19,16 @@ module.exports = (app) => {
     AtendimentoModel.store(atendimento, res);
   });
 
-  app.patch('/atendimentos/:id', (req, res) => {
+  app.patch("/atendimentos/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const values = req.body;
 
     AtendimentoModel.modify(id, values, res);
+  });
+
+  app.delete("/atendimentos/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+
+    AtendimentoModel.destroy(id, res);
   });
 };

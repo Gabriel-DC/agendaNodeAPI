@@ -106,6 +106,19 @@ class AtendimentoModel {
       if (err) {
         res.status(400).json(err);
       } else {
+        res.json({ ...result, changedFields: { ...values }, id });
+      }
+    });
+  }
+
+  destroy(id, res) {
+    const sql = "DELETE FROM atendimentos WHERE id = ?";
+    db.query(sql, [id], (err, result) => {
+      if (err) {
+        res.status(404).json(err);
+      } else {
+        result.info = "REGISTRO DELETADO!";
+        result.deletedId = id;
         res.json(result);
       }
     });
